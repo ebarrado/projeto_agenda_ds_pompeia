@@ -71,6 +71,23 @@ class Atividades extends StatefulWidget {
 }
 
 class _AtividadesState extends State<Atividades> {
+  //MÉTODO PARA CADASTRAR ATIVIDADE
+  void modalCadastrar(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Container(
+              child: Column(
+                children: [Text('Conteudo do Modal')],
+              ),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -115,5 +132,3 @@ class _AtividadesState extends State<Atividades> {
     );
   }
 }
-
-
