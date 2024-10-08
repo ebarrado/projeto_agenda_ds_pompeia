@@ -120,7 +120,9 @@ class _AtividadesState extends State<Atividades> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      modalCadastrar(context);
+                    },
                     child: Icon(Icons.edit),
                   )
                 ],
