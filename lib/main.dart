@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
           body: ListView(
             scrollDirection: Axis.vertical,
             children: [
-              Atividades('Atividade 1'),
+              Atividades('Atividade 1 - Criando Aplicação no Flutter'),
               Atividades('Atividade 2'),
               Atividades('Atividade 3'),
               Atividades('Atividade 4'),
@@ -68,38 +68,44 @@ class Atividades extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black87,
-      child: Stack(
-        children: [
-          Container(
-            color: Color.fromARGB(255, 179, 11, 25),
-            height: 140,
-          ),
-          Container(
-            color: Colors.white,
-            height: 100,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  color: Colors.black26,
-                  width: 72,
-                  height: 100,
-                ),
-                Container(
-                  child: Text(
-                    nome,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Icon(Icons.edit),
-                )
-              ],
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Container(
+        color: Colors.black87,
+        child: Stack(
+          children: [
+            Container(
+              color: Color.fromARGB(255, 179, 11, 25),
+              height: 140,
             ),
-          )
-        ],
+            Container(
+              color: Colors.white,
+              height: 100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    color: Colors.black26,
+                    width: 72,
+                    height: 100,
+                  ),
+                  Container(
+                    width: 200,
+                    child: Text(
+                      nome,
+                      style: TextStyle(
+                          fontSize: 16, overflow: TextOverflow.ellipsis),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Icon(Icons.edit),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
