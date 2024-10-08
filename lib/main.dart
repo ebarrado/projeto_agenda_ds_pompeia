@@ -61,11 +61,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Atividades extends StatelessWidget {
+class Atividades extends StatefulWidget {
   //variavel para o nome da atividade
   final String nome;
   const Atividades(this.nome, {Key? key}) : super(key: key);
 
+  @override
+  State<Atividades> createState() => _AtividadesState();
+}
+
+class _AtividadesState extends State<Atividades> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -92,7 +97,7 @@ class Atividades extends StatelessWidget {
                   Container(
                     width: 200,
                     child: Text(
-                      nome,
+                      widget.nome,
                       style: TextStyle(
                           fontSize: 16, overflow: TextOverflow.ellipsis),
                     ),
@@ -110,3 +115,5 @@ class Atividades extends StatelessWidget {
     );
   }
 }
+
+
