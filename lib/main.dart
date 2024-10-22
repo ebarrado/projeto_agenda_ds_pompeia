@@ -145,6 +145,32 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  //metodo excluir
+  void _excluirAtividade(int index) {
+    setState(() {
+      _atividades.remove(index);
+    });
+  }
+
+  //MODAL CONFIRMAR EXCLUSÃO
+  void _cofirmarExclusao(BuildContext context, int index) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Confirmar Exclusao'),
+            content: Text('Tem certeza que deseja Excluir a Atividade?'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Cancelar')),
+            ],
+          );
+        });
+  }
+
   //MODAL EDITAR ATIVIDADE
   //MÉTODO PARA CADASTRAR ATIVIDADE
   void modalEditar(BuildContext context, int index) {
@@ -240,10 +266,10 @@ class _MyHomePageState extends State<MyHomePage> {
           itemCount: _atividades.length,
           itemBuilder: (context, index) {
             return Atividades(
-              _atividades[index]['nome']!,
-              _atividades[index]['imagem']!,
-              () => modalEditar(context, index),
-            );
+                _atividades[index]['nome']!,
+                _atividades[index]['imagem']!,
+                () => modalEditar(context, index),
+                () => _cofirmarExclusao(context, index));
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -260,8 +286,10 @@ class Atividades extends StatelessWidget {
   final String nome;
   final String imagem;
   final VoidCallback onEdit;
+  final VoidCallback onDelete;
 
-  const Atividades(this.nome, this.imagem, this.onEdit, {Key? key})
+  const Atividades(this.nome, this.imagem, this.onEdit, this.onDelete,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -300,8 +328,15 @@ class Atividades extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
+                    onPressed: onDelete,
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                  ),
+                  ElevatedButton(
                     onPressed: onEdit,
-                    child: Icon(Icons.edit),
+                    child: Icon(Icons.edit, color: Colors.green),
                   )
                 ],
               ),
