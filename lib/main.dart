@@ -148,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //metodo excluir
   void _excluirAtividade(int index) {
     setState(() {
-      _atividades.remove(index);
+      _atividades.removeAt(index);
     });
   }
 
@@ -169,6 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ElevatedButton(
                   onPressed: () {
                     _excluirAtividade(index);
+                    Navigator.of(context).pop();
                   },
                   child: Text('Confirmar'))
             ],
