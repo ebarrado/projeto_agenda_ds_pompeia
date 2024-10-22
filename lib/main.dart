@@ -166,6 +166,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(context).pop();
                   },
                   child: Text('Cancelar')),
+              ElevatedButton(
+                  onPressed: () {
+                    _excluirAtividade(index);
+                  },
+                  child: Text('Confirmar'))
             ],
           );
         });
