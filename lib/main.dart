@@ -46,6 +46,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<Map<String, String>> _atividades = [];
 
+  //MÉTODO PARA EDITAR ATIVIDADE
+  void _editarAtividade(
+      int index, String nome, String descricao, String data, String imagem) {
+    setState(() {
+      _atividades[index] = {
+        'nome': nome,
+        'descricao': descricao,
+        'data': data,
+        'imagem': imagem
+      };
+    });
+  }
+
   //MÉTODO ADICIONAR ATIVIDADE
   void _adicionarAtividade(
       String nome, String descricao, String data, String imagem) {
@@ -125,6 +138,85 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       icon: const Icon(Icons.save),
                       label: const Text("Cadastrar"))
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  //MODAL EDITAR ATIVIDADE
+  //MÉTODO PARA CADASTRAR ATIVIDADE
+  void modalEditar(BuildContext context, int index) {
+    //VARIAVEIS PARA FORMULARIO
+    final TextEditingController nomeAtividade =
+        TextEditingController(text: _atividades[index]['nome']);
+    final TextEditingController descricaoAtividade =
+        TextEditingController(text: _atividades[index]['descricao']);
+    final TextEditingController dataAtividade =
+        TextEditingController(text: _atividades[index]['data']);
+    final TextEditingController urlAtividade =
+        TextEditingController(text: _atividades[index]['imagem']);
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Container(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Editar Atividade',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: Icon(Icons.close))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  //ELEMENTO DO FORMULÁRIO
+                  //LABEL E INPUT
+                  TextField(
+                    controller: nomeAtividade,
+                    decoration: InputDecoration(labelText: 'Nome da Atividade'),
+                  ),
+                  TextField(
+                    controller: descricaoAtividade,
+                    decoration:
+                        InputDecoration(labelText: 'Descricão da Atividade'),
+                  ),
+                  TextField(
+                    controller: dataAtividade,
+                    decoration: InputDecoration(labelText: 'Data da Atividade'),
+                  ),
+                  TextField(
+                    controller: urlAtividade,
+                    decoration: InputDecoration(labelText: 'Url da Atividade'),
+                  ),
+                  SizedBox(
+                    height: 14,
+                  ),
+                  ElevatedButton.icon(
+                      onPressed: () {
+                        _editarAtividade(
+                            index,
+                            nomeAtividade.text,
+                            descricaoAtividade.text,
+                            dataAtividade.text,
+                            urlAtividade.text);
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(Icons.save),
+                      label: const Text("Salvar Alteração"))
                 ],
               ),
             ),
