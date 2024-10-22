@@ -242,6 +242,7 @@ class _MyHomePageState extends State<MyHomePage> {
             return Atividades(
               _atividades[index]['nome']!,
               _atividades[index]['imagem']!,
+              () => modalEditar(context, index),
             );
           }),
       floatingActionButton: FloatingActionButton(
@@ -258,7 +259,10 @@ class Atividades extends StatelessWidget {
   //variavel para o nome da atividade
   final String nome;
   final String imagem;
-  const Atividades(this.nome, this.imagem, {Key? key}) : super(key: key);
+  final VoidCallback onEdit;
+
+  const Atividades(this.nome, this.imagem, this.onEdit, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -296,9 +300,7 @@ class Atividades extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      // modalCadastrar(context);
-                    },
+                    onPressed: onEdit,
                     child: Icon(Icons.edit),
                   )
                 ],
