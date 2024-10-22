@@ -1,3 +1,4 @@
+// main.dart
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,66 +12,38 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // TRY THIS: Try running your application with "flutter run". You'll see
-          // the application has a purple toolbar. Then, without quitting the app,
-          // try changing the seedColor in the colorScheme below to Colors.green
-          // and then invoke "hot reload" (save your changes or press the "hot
-          // reload" button in a Flutter-supported IDE, or press "r" if you used
-          // the command line to start the app).
-          //
-          // Notice that the counter didn't reset back to zero; the application
-          // state is not lost during the reload. To reset the state, use hot
-          // restart instead.
-          //
-          // This works for code too, not just values: Most code changes can be
-          // tested with just a hot reload.
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: Center(
-              child: Text(
-                'Agenda DS 2024',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            backgroundColor: Color.fromARGB(255, 214, 130, 61),
-          ),
-          body: ListView(
-            scrollDirection: Axis.vertical,
-            children: [
-              Atividades('Atividade 1 - Criando Aplicação no Flutter'),
-              Atividades('Atividade 2'),
-              Atividades('Atividade 3'),
-              Atividades('Atividade 4'),
-              Atividades('Atividade 5'),
-              Atividades('Atividade 6'),
-              Atividades('Atividade 7')
-            ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-          ),
-        ));
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: MyHomePage(),
+    );
   }
 }
 
-class Atividades extends StatefulWidget {
-  //variavel para o nome da atividade
-  final String nome;
-  const Atividades(this.nome, {Key? key}) : super(key: key);
-
+class MyHomePage extends StatefulWidget {
   @override
-  State<Atividades> createState() => _AtividadesState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _AtividadesState extends State<Atividades> {
+class _MyHomePageState extends State<MyHomePage> {
   //MÉTODO PARA CADASTRAR ATIVIDADE
   void modalCadastrar(BuildContext context) {
     showDialog(
@@ -87,6 +60,45 @@ class _AtividadesState extends State<Atividades> {
           );
         });
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'Agenda DS 2024',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        backgroundColor: Color.fromARGB(255, 214, 130, 61),
+      ),
+      body: ListView(
+        scrollDirection: Axis.vertical,
+        children: [
+          Atividades('Atividade 1 - Criando Aplicação no Flutter'),
+          Atividades('Atividade 2'),
+          Atividades('Atividade 3'),
+          Atividades('Atividade 4'),
+          Atividades('Atividade 5'),
+          Atividades('Atividade 6'),
+          Atividades('Atividade 7')
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          modalCadastrar(context);
+        },
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class Atividades extends StatelessWidget {
+  //variavel para o nome da atividade
+  final String nome;
+  const Atividades(this.nome, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,14 +126,14 @@ class _AtividadesState extends State<Atividades> {
                   Container(
                     width: 200,
                     child: Text(
-                      widget.nome,
+                      nome,
                       style: TextStyle(
                           fontSize: 16, overflow: TextOverflow.ellipsis),
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      modalCadastrar(context);
+                      // modalCadastrar(context);
                     },
                     child: Icon(Icons.edit),
                   )
